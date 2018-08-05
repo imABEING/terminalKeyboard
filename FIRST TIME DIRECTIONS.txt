@@ -1,0 +1,20 @@
+ROLEX ALEXX
+
+TERMINAL KEYBOARD
+
+
+
+
+
+1. Open terminal 
+2. Type 'cd ', then drag the blue icon from the terminalKeyboard folder into the terminal.
+3. It should now read 'cd /Users/....................ROLEX\ ALEXX/Code/C++/terminalKeyboard'. Press Enter.
+4. To compile ,type 'make terminalKeyboard'. Press Enter.
+5. To run, type './terminalKeyboard'. Press Enter. 
+
+
+
+This program is written in C++, and integrates cSound's "oscili" opcode to produce an electronic keyboard. It uses a simple UI made of ASCII characters, and all keys are labeled according to the character that triggers its note. 
+
+
+Press X to EXIT.
