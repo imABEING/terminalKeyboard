@@ -13,6 +13,8 @@
 #include <string>
 #include <stdlib.h>
 #include <cstdio>
+#include <string.h>
+#include <cstdlib>
 using namespace std;
 
 #define NEWLINE '\n'
@@ -21,32 +23,41 @@ using namespace std;
 #define AUTHOR "  by ROLEX ALEXX"
 #define SIZE 12
 
+class terminalKeyboard {
+    FILE *Point;
+    char csdFile[256] = "terminalKeyboard.csd";
+    char commandline [1000] = "csound -odac -d -O null ";
 
-FILE *Point; 
-char csdFile[256] = "Playback.csd";
-int system();
-int exit();
-int sort();
+public:
+    int system();
+    int exit();
+    int sort();
+    void heading();
+    void keyboardUI();
 
+    terminalKeyboard();
+    ~terminalKeyboard();
 
-string n ("SIZE");
-float freq;
-int reps;
-int myInt;
-char note;
+private:
+    //string n ("SIZE");
+    float freq;
+    int reps;
+    int myInt;
+    char note;
+    int* data;
+};
 
-void heading();
-void keyboardUI();
-
-int main()
-{
-    sort();
-	return 0;
+terminalKeyboard::terminalKeyboard(){
+    data = new int;
 }
 
-void heading()
+terminalKeyboard::~terminalKeyboard() {
+    delete[] data;
+}
+
+void terminalKeyboard::heading()
 {
-	system("clear");
+    ::system("clear");
 	cout << "\n \t \t \t " << LINE << " \n";
 	cout << "\n \t \t \t \t " << TITLE << " \n";
 	cout << "\n \t \t \t \t " << AUTHOR << "\n";
@@ -56,7 +67,7 @@ void heading()
 
 }
 
-void keyboardUI()
+void terminalKeyboard::keyboardUI()
 {
     heading();
     cout << NEWLINE << NEWLINE << NEWLINE << NEWLINE; 
@@ -101,12 +112,12 @@ void keyboardUI()
     cout << NEWLINE << NEWLINE;
 }
 
-int exit()
+int terminalKeyboard::exit()
 {
     return 0;
 }
 
-int sort()
+int terminalKeyboard::sort()
 {     
     keyboardUI();
 
@@ -179,12 +190,9 @@ int sort()
             return 0;
             break;
 
-                
             default:
                 printf("That was not a note name.");
-                
-        } 
-
+        }
 
     Point = fopen(csdFile, "w");
     if(Point != NULL)
@@ -212,14 +220,19 @@ int sort()
     }
     
     fclose(Point);
-    
-    char commandline [1000] = "csound -odac -d -O null ";
     strcat(commandline, csdFile);
-    system (commandline);
+    ::system (commandline);
        
     cout << "You entered: " << note << "\n";
 
-    main();        
+    sort();
 
 return 0;
+}
+
+int main()
+{
+    terminalKeyboard run;
+    run.sort();
+    return 0;
 }
